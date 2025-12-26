@@ -52,11 +52,51 @@ body {
     padding: 24px 28px;
 }
 
-/* 헤더만 가로 정렬 */
+/* ---- page header layout ---- */
 .page-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+/* 왼쪽 영역 */
+.page-header-left {
+    display: flex;
+    align-items: center;
     gap: 12px;
+}
+
+/* 채널 검색 버튼 */
+.channel-search-btn {
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--card-border);
+    background: var(--card);
+    color: var(--text);
+    font-weight: 700;
+    cursor: pointer;
+
+    transition: 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+}
+
+.channel-search-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px var(--shadow);
+}
+
+/* 다크 모드에서도 버튼 잘 보이게 */
+@media (prefers-color-scheme: dark) {
+    .channel-search-btn {
+        border-color: rgba(255, 255, 255, 0.6);
+        /* ⭐ 흰색 테두리 */
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+    }
+
+    .channel-search-btn:hover {
+        border-color: #ffffff;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
 }
 
 .chzzk-title {
@@ -104,6 +144,18 @@ body {
     height: 26px;
 }
 
+.header-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.page-description {
+    margin: -8px 0 12px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
 /* ---- heatmap card ---- */
 .heatmap-container {
     padding: 18px 18px 0px;
@@ -112,6 +164,47 @@ body {
     border-radius: 18px;
     box-shadow: 0 12px 36px var(--shadow);
     backdrop-filter: blur(10px);
+}
+
+/* ✅ heatmap 위 로딩 오버레이를 위해 relative */
+.heatmap-container {
+    position: relative;
+}
+
+/* ✅ 히트맵 위를 덮는 로딩 레이어 */
+.heatmap-loading-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    border-radius: 18px;
+
+    /* 배경 살짝 흐리게 */
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(6px);
+}
+
+/* 다크 모드에서 오버레이 배경 */
+@media (prefers-color-scheme: dark) {
+    .heatmap-loading-overlay {
+        background: rgba(11, 15, 23, 0.62);
+    }
+}
+
+.heatmap-loading-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.heatmap-loading-overlay {
+    pointer-events: all;
 }
 
 .heatmap-header {
@@ -138,6 +231,21 @@ body {
     background: rgba(99, 102, 241, 0.12);
     border: 1px solid rgba(99, 102, 241, 0.22);
     color: rgba(99, 102, 241, 0.95);
+}
+
+.heatmap-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    /* 아이콘 느낌 유지 */
+    object-fit: cover;
+    border: 1px solid var(--card-border);
+}
+
+@media (prefers-color-scheme: dark) {
+    .heatmap-avatar {
+        border-color: rgba(255, 255, 255, 0.6);
+    }
 }
 
 .heatmap-title-main {
@@ -283,4 +391,9 @@ body {
     .legend-box.color-empty {
         background: rgba(255, 255, 255, 0.08);
     }
+}
+
+.react-calendar-heatmap rect.out-of-range {
+    opacity: 0;
+    pointer-events: none;
 }

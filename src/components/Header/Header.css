@@ -1,0 +1,27 @@
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.page-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.page-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chzzk-logo-img {
+    height: 26px;
+}
+
+.page-title {
+    margin: 0;
+}
