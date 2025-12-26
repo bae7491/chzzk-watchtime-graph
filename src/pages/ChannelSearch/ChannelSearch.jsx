@@ -5,6 +5,18 @@ import { ClipLoader } from 'react-spinners';
 import './ChannelSearch.css';
 import Header from '../../components/Header/Header';
 
+const FALLBACK_THUMB =
+    "data:image/svg+xml;utf8," +
+    encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
+      <rect width="100%" height="100%" rx="8" ry="8" fill="#1f2937"/>
+      <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+            fill="#9ca3af" font-family="Arial" font-size="10">
+        NO IMAGE
+      </text>
+    </svg>
+`);
+
 export default function ChannelSearch() {
     const [keyword, setKeyword] = useState('');
     const [channels, setChannels] = useState([]);
@@ -38,7 +50,13 @@ export default function ChannelSearch() {
 
     return (
         <div className="app">
-            <Header title="채널 검색" />
+            <Header
+                title="채널 검색"
+                right={
+                    <button className="channel-search-btn" onClick={() => navigate(-1)}>
+                        뒤로가기
+                    </button>
+                } />
 
             <div className="search-bar">
                 <div className="search-row">
@@ -63,6 +81,12 @@ export default function ChannelSearch() {
                 </div>
             )}
 
+            {!loading && channels.length === 0 && keyword && (
+                <div className="search-empty">
+                    검색 결과가 없습니다!
+                </div>
+            )}
+
             <div className="channel-list">
                 {channels.map((ch, idx) => (
                     <div
@@ -74,16 +98,14 @@ export default function ChannelSearch() {
                         onKeyDown={(e) => e.key === 'Enter' && onSelectChannel(ch)}
                     >
                         <div className={`channel-avatar ${!ch.channelImageUrl ? 'placeholder' : ''}`}>
-                            {ch.channelImageUrl ? (
-                                <img
-                                    src={ch.channelImageUrl}
-                                    alt={ch.channelName}
-                                    onError={(e) => {
-                                        e.currentTarget.style.display = 'none';
-                                        e.currentTarget.parentElement?.classList.add('placeholder');
-                                    }}
-                                />
-                            ) : null}
+                            <img
+                                src={ch.channelImageUrl || FALLBACK_THUMB}
+                                alt={ch.channelName}
+                                onError={(e) => {
+                                    e.currentTarget.onerror = null; // 무한 루프 방지
+                                    e.currentTarget.src = FALLBACK_THUMB;
+                                }}
+                            />
                         </div>
 
                         <div className="channel-info">
