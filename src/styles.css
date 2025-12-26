@@ -156,6 +156,57 @@ body {
     color: var(--muted);
 }
 
+.channel-move-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    margin-left: 10px;
+    padding: 4px 12px 4px 10px;
+
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+
+    color: #22c55e;
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.35);
+    border-radius: 999px;
+
+    transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+
+.channel-move-btn svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    opacity: 0.9;
+}
+
+.channel-move-btn:hover {
+    transform: translateY(-1px);
+    background: rgba(34, 197, 94, 0.18);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.35);
+}
+
+.channel-move-btn:active {
+    transform: translateY(0);
+}
+
+/* ---- dark mode ---- */
+@media (prefers-color-scheme: dark) {
+    .channel-move-btn {
+        color: #86efac;
+        background: rgba(34, 197, 94, 0.18);
+        border-color: rgba(134, 239, 172, 0.5);
+    }
+
+    .channel-move-btn:hover {
+        background: rgba(34, 197, 94, 0.28);
+        box-shadow: 0 6px 18px rgba(34, 197, 94, 0.45);
+    }
+}
+
 /* ---- heatmap card ---- */
 .heatmap-container {
     padding: 18px 18px 0px;

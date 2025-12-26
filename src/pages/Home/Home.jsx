@@ -311,7 +311,25 @@ export default function Home() {
                         <div>
                             <div className="heatmap-title-main">
                                 {channelName ? `${channelName} 님의 1년 Activity` : '1년 Activity'}
+
+                                {channelId ? (
+                                    <a
+                                        className="channel-move-btn"
+                                        href={`https://chzzk.naver.com/${channelId}`}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        title="치지직 채널로 이동"
+                                        style={{ marginLeft: 10 }}
+                                    >
+                                        채널 이동
+                                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                            <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z" />
+                                            <path d="M5 5h6V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-2v6H5V5z" />
+                                        </svg>
+                                    </a>
+                                ) : null}
                             </div>
+
                             <div className="heatmap-title-sub">
                                 {`기준일: ${formatDate(rangeStartDate)} ~ ${formatDate(endDate)}`}
                             </div>
