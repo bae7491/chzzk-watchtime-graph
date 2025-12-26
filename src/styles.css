@@ -1,0 +1,286 @@
+/* ---- base (라이트) ---- */
+:root {
+    --bg: #ffffff;
+    --text: #111827;
+    --muted: #6b7280;
+    --card: rgba(0, 0, 0, 0.03);
+    --card-border: rgba(0, 0, 0, 0.08);
+    --shadow: rgba(0, 0, 0, 0.12);
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR,
+        Apple SD Gothic Neo, "Malgun Gothic", sans-serif;
+}
+
+/* ---- dark mode ---- */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0b0f17;
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.65);
+        --card: rgba(255, 255, 255, 0.06);
+        --card-border: rgba(255, 255, 255, 0.12);
+        --shadow: rgba(0, 0, 0, 0.35);
+    }
+
+    body {
+        background: radial-gradient(1200px 600px at 20% 0%, #1a2a6c33 0%, transparent 55%),
+            radial-gradient(900px 500px at 90% 20%, #2bd4ff22 0%, transparent 55%),
+            var(--bg);
+        color: var(--text);
+    }
+
+    .chzzk-dot {
+        box-shadow:
+            0 0 0 4px rgba(34, 197, 94, 0.25),
+            0 0 20px rgba(34, 197, 94, 0.6);
+    }
+}
+
+/* ---- layout ---- */
+/* ---- CHZZK title ---- */
+/* 전체 레이아웃은 세로 */
+.app {
+    display: auto;
+    flex-direction: column;
+    gap: 20px;
+    margin: 48px auto;
+    padding: 24px 28px;
+}
+
+/* 헤더만 가로 정렬 */
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.chzzk-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin: 0;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+
+    color: var(--text);
+}
+
+/* 치지직 포인트 그린 */
+.chzzk-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 4px;
+    background: #22c55e;
+    /* CHZZK 느낌의 네온 그린 */
+
+    box-shadow:
+        0 0 0 4px rgba(34, 197, 94, 0.18),
+        0 0 16px rgba(34, 197, 94, 0.45);
+}
+
+/* 서브 타이틀 */
+.chzzk-subtitle {
+    margin: 6px 0 0 22px;
+    /* dot 기준으로 정렬 */
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.chzzk-logo-img {
+    height: 26px;
+}
+
+/* ---- heatmap card ---- */
+.heatmap-container {
+    padding: 18px 18px 0px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    box-shadow: 0 12px 36px var(--shadow);
+    backdrop-filter: blur(10px);
+}
+
+.heatmap-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.heatmap-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.heatmap-icon {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.22);
+    color: rgba(99, 102, 241, 0.95);
+}
+
+.heatmap-title-main {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+}
+
+.heatmap-title-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+/* ---- legend ---- */
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.legend-text {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.legend-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+    .legend-box {
+        border-color: rgba(255, 255, 255, 0.14);
+    }
+}
+
+/* ---- heatmap text ---- */
+.react-calendar-heatmap text {
+    fill: var(--muted);
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.react-calendar-heatmap .react-calendar-heatmap-weekday-labels text {
+    fill: var(--text);
+    opacity: 0.75;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+/* ---- tiles ---- */
+.react-calendar-heatmap rect {
+    rx: 4px;
+    ry: 4px;
+    stroke: var(--card-border);
+    stroke-width: 1px;
+    transition: transform 120ms ease, filter 120ms ease, opacity 120ms ease;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.react-calendar-heatmap rect:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.1);
+}
+
+/* ---- week highlight on hover ---- */
+.react-calendar-heatmap rect.week-dim {
+    opacity: 0.35;
+}
+
+.react-calendar-heatmap rect.week-highlight {
+    opacity: 1;
+    filter: brightness(1.15);
+}
+
+/* ---- colors ---- */
+.react-calendar-heatmap .color-empty {
+    fill: rgba(0, 0, 0, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+    .react-calendar-heatmap .color-empty {
+        fill: rgba(255, 255, 255, 0.08);
+    }
+}
+
+/* 진하기 단계 */
+.react-calendar-heatmap .color-github-1 {
+    fill: #9be9a8;
+}
+
+.react-calendar-heatmap .color-github-2 {
+    fill: #56d364;
+}
+
+.react-calendar-heatmap .color-github-3 {
+    fill: #2ea043;
+}
+
+.react-calendar-heatmap .color-github-4 {
+    fill: #1f6f3d;
+}
+
+/* ---- tooltip ---- */
+.react-tooltip {
+    border-radius: 10px !important;
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+    background: rgba(20, 24, 35, 0.92) !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* ✅ Legend(less/more) 박스에 색 표시 (span은 fill이 아니라 background) */
+.legend-box.color-empty {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.legend-box.color-github-1 {
+    background: #9be9a8;
+}
+
+.legend-box.color-github-2 {
+    background: #56d364;
+}
+
+.legend-box.color-github-3 {
+    background: #2ea043;
+}
+
+.legend-box.color-github-4 {
+    background: #1f6f3d;
+}
+
+@media (prefers-color-scheme: dark) {
+    .legend-box.color-empty {
+        background: rgba(255, 255, 255, 0.08);
+    }
+}
